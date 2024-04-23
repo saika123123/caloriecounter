@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日付ごとの総カロリー一覧</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        /* クリック時のハイライト用のスタイル */
+        .dateRow.clicked {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>日付ごとの総カロリー一覧</h1>
+    <table id="calorieTable">
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>総カロリー</th>
+            </tr>
+        </thead>
+        <tbody id="calorieTableBody"></tbody>
+    </table>
+
+    <h2 id="detailsHeader" style="display: none;">詳細</h2>
+    <ul id="detailsList" style="display: none;"></ul>
+
+    <script>
+        $(document).ready(function() {
+            // 日付ごとの総カロリーを取得してテーブルに表示する
+            $.getJSON("/meals/sum-calories-by-date", function(data) {
+                $.each(data, function(date, calorie) {
+                    var row = '<tr class="dateRow"><td>' + date + '</td><td>' + calorie + '</td></tr>';
+                    $('#calorieTableBody').append(row);
+                });
+            });
+
+            // 日付をクリックしたときに詳細を表示する
+            $('#calorieTableBody').on('click', 'tr.dateRow', function() {
+                // 以前のクリックスタイルを削除
+                $('.dateRow.clicked').removeClass('clicked');
+                // クリックされた行にクリックスタイルを追加
+                $(this).addClass('clicked');
+
+                var date = $(this).find('td:first').text();
+                $.getJSON("/meals/meals-by-date?date=" + date, function(data) {
+                    $('#detailsHeader').show().text(date + 'の食事詳細');
+                    $('#detailsList').empty();
+                    $.each(data, function(index, meal) {
+                        var listItem = '<li>' + meal.itemname + ' - ' + meal.calories + 'カロリー</li>';
+                        $('#detailsList').append(listItem);
+                    });
+                    $('#detailsList').show();
+                });
+            });
+        });
+    </script>
+
+<button onclick="location.href='http://localhost:8080/meal'">戻る</button>
+</body>
+</html>

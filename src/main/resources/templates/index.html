@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MealCounter</title>
+</head>
+
+<body>
+    <h1>カロリー記録アプリ</h1>
+    <form method="post" th:action="@{/add}">
+        <input type="text" name="itemname" />
+        <input type="number" name="calories" />
+        <input type="date" name="date" />
+        <input type="submit" value="食事を追加" />
+    </form>
+
+    <button onclick="location.href='http://localhost:8080/chart'">一覧を表示</button>
+    <button onclick="location.href='http://localhost:8080/gpt/get-response'">ChatGPTでカロリーを算出する</button>
+</body>
+
+</html>

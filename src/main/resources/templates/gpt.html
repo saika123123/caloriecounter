@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GPT Calorie Counter</title>
+</head>
+<body>
+    <h1>ChatGPTに質問する</h1>
+    <label for="foodName">Food Name:</label>
+    <input type="text" id="foodName" name="foodName">
+    <button onclick="getCalories()">質問</button>
+    <p id="calorieCount">おおよそのカロリー</p>
+
+    <script>
+        function getCalories() {
+            var foodName = document.getElementById('foodName').value;
+            fetch('/gpt/get-response', {
+                method: 'POST',
+                body: JSON.stringify({ foodName: foodName }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('calorieCount').textContent = data;
+            });
+        }
+    </script>
+</body>
+</html>
