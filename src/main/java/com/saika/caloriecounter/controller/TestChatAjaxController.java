@@ -29,7 +29,7 @@ public class TestChatAjaxController {
 	@PostMapping("/openAiChat")
 	public ResponseEntity<String> openAiChat(@RequestBody String preMessage) {
 		String url = "https://api.openai.com/v1/chat/completions";
-		String api_key = System.getenv("sk-proj-mfPQe7nmLEZYuaWfZ2mNT3BlbkFJiXPjQ4gp4wBcBl8lZJ8w");
+		String api_key = System.getenv("sk-proj-pxcVycC1xLgmZIdKeorvT3BlbkFJ5TsUJXbOgfbVvDJbhIXt");
 		String model = "gpt-3.5-turbo";
 		String message = "{\"role\": \"system\", \"content\": \"返答は日本語で\"},{\"role\": \"user\", \"content\": \" + preMessage + \"}";
 		String content = "";
