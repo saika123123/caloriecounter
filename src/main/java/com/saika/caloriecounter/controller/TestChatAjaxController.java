@@ -18,10 +18,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 @Controller
-@RequestMapping("/gpt")
+@RequestMapping("/chat")
 public class TestChatAjaxController {
 
-	@RequestMapping("/gpt")
+	@RequestMapping("")
 	public String toStart() {
 		return "start";
 	}

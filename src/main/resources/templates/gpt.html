@@ -1,33 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <title>question to ChatGPT</title>
-    <script th:src="@{/js/chatgpt.js}"></script>
+    <title>OpenAI Chat Bot</title>
 </head>
 
 <body>
-    <div class="container text-center">
-        <div class="row">
-            <div class="col">
-                <h1>ChatGPTに質問する</h1>
-            </div>
-            <div class="col">
-                <div class="chat-input-area">
-                    <input type="text" id="input-field" placeholder="質問を入力" />
-                    <input type="button" value="送信" id="send-button">
-                </div>
-                <div class="chat-response-area">
-                </div>
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            </div>
-            <div class="col">
-                <button onclick="location.href='http://localhost:8080/meal'">戻る</button>
-            </div>
-        </div>
-    </div>
+    <h1>ChatGPTに質問する</h1>
 
+    <input type="text" id="input-field" placeholder="質問を入力">
+    <button id="send-button">送信</button>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/start.js}"></script>
+
+    <button onclick="location.href='http://localhost:8080/chart'">戻る</button>
 </body>
 
 </html>

@@ -1,40 +1,22 @@
-window.onload = function () {
+$(function () {
     $('#send-button').on('click', function () {
         const message = $('#input-field').val();
         sendRequest(message);
-    });
-};
-//OpenAI APIにリクエストを送信する処理
+    });//■ onの終わり
+});//■ 1番上のready関数の最後
+
+//OpenAI APIにリクエストを送信する関数
 function sendRequest(message) {
     $.ajax({
-        url: "gpt/openAiChat",
+        url: "/chat/openAiChat",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify({
             message: message
         })
-    }).done(function (response) {
-        $('.chat-response-area').html('<p>' + insertNewlines(response) + '</p>');
-    }).fail(function () {
+    }).done(function (response, textStatus, jqXHR) {
+        console.log(response);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("きてない");
     });
-}
-
-// 。(句点)ごとに改行コードを挿入する。
-function insertNewlines(str) {
-    var result = '';
-    var len = str.length;
-    var i = 0;
-    while (i < len) {
-        var substr = str.substring(i, i + 10);
-        var idx = substr.lastIndexOf('。');
-        if (idx !== -1) {
-            result += substr.substring(0, idx + 1) + '<br>';
-            i += idx + 1;
-        } else {
-            result += substr;
-            i += 10;
-        }
-    }
-    return result;
 }

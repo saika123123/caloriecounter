@@ -34,6 +34,11 @@ public class MealController {
         return "chart";
     }
 
+    @RequestMapping(value = "/gpts")
+    public String askgpt(){
+        return "gpt";
+    }
+
 
     @RequestMapping(value = "/update")
     public String update(MealItems meal) {
