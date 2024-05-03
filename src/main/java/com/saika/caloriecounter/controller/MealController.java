@@ -39,6 +39,11 @@ public class MealController {
         return "gpt";
     }
 
+    @RequestMapping(value = "/graph")
+    public String viewgraph(){
+        return "graph";
+    }
+
 
     @RequestMapping(value = "/update")
     public String update(MealItems meal) {

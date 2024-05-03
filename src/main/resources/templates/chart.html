@@ -8,7 +8,54 @@
     <style>
         /* クリック時のハイライト用のスタイル */
         .dateRow.clicked {
-            background-color: lightblue;
+            background-color: rgb(181, 173, 230);
+        }
+
+        /* 全体のスタイル */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -18,15 +65,13 @@
         <thead>
             <tr>
                 <th>日付</th>
-                <th>総カロリー</th>
+                <th>総カロリー(kcal)</th>
             </tr>
         </thead>
         <tbody id="calorieTableBody"></tbody>
     </table>
-
     <h2 id="detailsHeader" style="display: none;">詳細</h2>
     <ul id="detailsList" style="display: none;"></ul>
-
     <script>
         $(document).ready(function() {
             // 日付ごとの総カロリーを取得してテーブルに表示する
@@ -43,13 +88,12 @@
                 $('.dateRow.clicked').removeClass('clicked');
                 // クリックされた行にクリックスタイルを追加
                 $(this).addClass('clicked');
-
                 var date = $(this).find('td:first').text();
                 $.getJSON("/meals/meals-by-date?date=" + date, function(data) {
                     $('#detailsHeader').show().text(date + 'の食事詳細');
                     $('#detailsList').empty();
                     $.each(data, function(index, meal) {
-                        var listItem = '<li>' + meal.itemname + ' - ' + meal.calories + 'カロリー</li>';
+                        var listItem = '<li>' + meal.itemname + ' - ' + meal.calories + 'kcal</li>';
                         $('#detailsList').append(listItem);
                     });
                     $('#detailsList').show();
@@ -57,7 +101,6 @@
             });
         });
     </script>
-
-<button onclick="location.href='http://localhost:8080/meal'">戻る</button>
+    <button onclick="location.href='http://localhost:8080/meal'">戻る</button>
 </body>
 </html>
