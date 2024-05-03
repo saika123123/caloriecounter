@@ -9,8 +9,8 @@
 		<version>3.2.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.todo</groupId>
-	<artifactId>app</artifactId>
+	<groupId>com.saika</groupId>
+	<artifactId>caloriecounter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>app</name>
 	<description>Demo project for Spring Boot</description>
