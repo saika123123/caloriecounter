@@ -1,8 +1,11 @@
-FROM maven:3.8.5-openjdk-17 AS build
-COPY . .
-RUN mvn clean package -Dmaven.test.skip=true
+FROM maven:3.9.2-eclipse-temurin-17-alpine as builder
 
-FROM openjdk:17-jdk-slim
-COPY --from=build /target/caloriecounter-0.0.1-SNAPSHOT.jar caloriecounter.jar
+COPY ./src src/
+COPY ./pom.xml pom.xml
+
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:17-jre-alpine
+COPY --from=builder target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT [ "java", "-jar", "caloriecounter.jar"]
+CMD ["java","-jar","app.jar"]
