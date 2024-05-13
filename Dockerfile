@@ -1,11 +1,7 @@
-FROM maven:3.9.2-eclipse-temurin-17-alpine as builder
-
-COPY ./src src/
-COPY ./pom.xml pom.xml
-
-RUN mvn clean package -DskipTests
-
-FROM eclipse-temurin:17-jre-alpine
-COPY --from=builder target/*.jar app.jar
+FROM maven:3-eclipse-temurin-17 AS build
+COPY . .
+RUN mvn clean package -Dmaven.test.skip=true
+FROM eclipse-temurin:17-alpine
+COPY --from=build /target/game-0.0.1-SNAPSHOT.jar caloreicounter.jar
 EXPOSE 8080
-CMD ["java","-jar","app.jar"]
+ENTRYPOINT ["java", "-jar", "caloreicounter.jar"]
