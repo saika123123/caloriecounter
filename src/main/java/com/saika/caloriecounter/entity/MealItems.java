@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "meal_items")
+@Table(name = "meal_items2")
 public class MealItems {
 
     @Id
@@ -20,5 +20,6 @@ public class MealItems {
     private LocalDate date;
     private String itemname;
     private Integer calories;
+    private long userid;
 
 }

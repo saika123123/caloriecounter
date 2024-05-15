@@ -10,12 +10,12 @@ import lombok.Data;
 
 @Data // これは Lombok によるアノテーションです。これにより、ゲッターやセッター、コンストラクタなどが自動的に生成されます
 @Entity // これはデータベースのテーブルを表しています
-@Table(name = "Users") // このクラスが対応するテーブルの名前は "Users" です
+@Table(name = "Users2") // このクラスが対応するテーブルの名前は "Users" です
 public class User {
 
     @Id // これが各ユーザを一意に識別するためのIDとなります
     @GeneratedValue(strategy = GenerationType.IDENTITY) // IDは自動的に増加します
-    @Column(name = "id") // データベースに合わせてカラム名を修正
+    @Column(name = "userid") // データベースに合わせてカラム名を修正
     private Integer id;
 
     @Column(name = "username", nullable = false, unique = true) // "username" カラム。各ユーザーのユーザー名を表します。同じ名前のユーザーは存在できません
