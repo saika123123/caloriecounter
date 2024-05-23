@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.saika.caloriecounter.mapper.MealMapper">
-  <select id="selectAll" resultType="com.saika.caloriecounter.entity.MealItems"> select * from meal_items </select>
+  <select id="selectAll" resultType="com.saika.caloriecounter.entity.MealItems"> 
+    select * from meal_items3
+  </select>
   <insert id="add" parameterType="com.saika.caloriecounter.entity.MealItems"> 
-    insert into meal_items (itemname, date, calories) 
-    values (#{itemname}, #{date}, #{calories,jdbcType=INTEGER}) 
-  </insert>
-  <update id="update" parameterType="com.saika.caloriecounter.entity.MealItems">
-    update meal_items set itemname=#{itemname}, date=#{date}, calories=#{calories,jdbcType=INTEGER} 
-    where id=#{id}
-  </update>
-
+    INSERT INTO public.meal_items3 (date, itemname, calories, userid, username)
+        VALUES (#{date}, #{itemname}, #{calories}, #{userid}, #{username})
+    </insert>
+    <update id="update" parameterType="com.saika.caloriecounter.entity.MealItems">
+      UPDATE public.meal_items3 
+      SET date = #{date},
+          itemname = #{itemname}, 
+          calories = #{calories}, 
+          userid = #{userid}, 
+          username = #{username}
+      WHERE id = #{id}
+    </update>
 </mapper>

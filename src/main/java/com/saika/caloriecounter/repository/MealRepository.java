@@ -12,5 +12,6 @@ import com.saika.caloriecounter.entity.MealItems;
  */
 @Repository
 public interface MealRepository extends JpaRepository<MealItems, Long>{
-    List<MealItems> findByDate(LocalDate date);
+    List<MealItems> findByDateAndUsername(LocalDate date, String username);
+    List<MealItems> findByUsername(String username);
 }

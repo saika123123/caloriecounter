@@ -26,4 +26,9 @@ public class LoginController {
     public String index() {
         return "index"; // index.htmlを表示します
     }
+
+    @GetMapping("/logout") // "/login"というURLに対するGETリクエストを処理します
+    public String logout() {
+        return "login"; // login.htmlを表示します
+    }
 }
