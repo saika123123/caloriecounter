@@ -1,5 +1,7 @@
 package com.saika.caloriecounter.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import lombok.Data;
 
 @Data // これは Lombok によるアノテーションです。これにより、ゲッターやセッター、コンストラクタなどが自動的に生成されます
 @Entity // これはデータベースのテーブルを表しています
-@Table(name = "Users") // このクラスが対応するテーブルの名前は "Users" です
+@Table(name = "users3") // このクラスが対応するテーブルの名前は "Users" です
 public class User {
 
     @Id // これが各ユーザを一意に識別するためのIDとなります
@@ -27,4 +29,6 @@ public class User {
     @Column(name = "email", nullable = false, unique = true) // "email" カラム。ユーザーのメールアドレスを表します。同じメールアドレスのユーザーは存在できません
     private String email;
 
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt;
 }
